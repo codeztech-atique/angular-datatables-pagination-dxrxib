@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 declare let $: any;
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Papa } from 'ngx-papaparse';
+// import * as data from './../app/tabledata';
+// import { FACTURES } from './../app/tabledata.csv';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -8,6 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AppComponent {
   name = 'Angular';
+  
   constructor(private http: HttpClient) {
     // this.parseCSV();
   }
@@ -40,17 +44,13 @@ export class AppComponent {
     //do previous particular the records like  0 - 100 rows.
     //we are calling to API
   }
-  // parseCSV() {
-  //   this.http.get('./src/app/data/tabledata.csv', {responseType: 'json'})
-  //   .subscribe(
-  //       data => {
-  //           console.log(data);
-  //       },
-  //       error => {
-  //           console.log(error);
-  //       }
-  //   );
-  // }
+  parseCSV() {
+    // this.papa.parse(data,{
+    //         complete: (result) => {
+    //             console.log('Parsed: ', result);
+    //         }
+    // });
+  }
 
 
 }
