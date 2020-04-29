@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
+declare let $: any;
 // import * as data from './../app/tabledata';
 // import { FACTURES } from './../app/tabledata.csv';
 @Component({
@@ -17,6 +18,20 @@ export class AppComponent {
   }
   ngOnInit() {
     let table = $('#example').DataTable({
+      "deferRender": true,
+			"searching": true,
+			"destroy": true,
+			"filter": true,
+			"scrollY": 200,
+			"scrollCollapse": true,
+			"scroller": true,
+            "paging": false,
+            "lengthChange": false,
+			"ordering": true,
+			"order": [[ 1, "desc" ]],
+            "info": true,
+            "autoWidth": false,
+			"sDom": 'lfrtip',
       drawCallback: () => {
         $('.paginate_button.next').on('click', () => {
             this.nextButtonClickEvent();
