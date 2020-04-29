@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 declare let $: any;
-// import * as data from './../app/tabledata';
-// import { FACTURES } from './../app/tabledata.csv';
+
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
