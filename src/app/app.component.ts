@@ -75,7 +75,7 @@ export class AppComponent {
 			searching: true,
 			destroy: true,
 			filter: true,
-			scrollY: 100,
+			scrollY: 300,
 			scrollCollapse: true,
 			scroller: true,
       paging: true,
