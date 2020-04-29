@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 import { ReadfileService } from './readfile.service';
 import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import 'rxjs/add/operator/map';
 declare let $: any;
 
 
@@ -51,6 +53,7 @@ export class AppComponent {
     const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
+      pageLength: 10,
       responsive: true,
       serverSide: true,
       processing: true,
