@@ -7,6 +7,6 @@ export class ReadfileService {
   constructor(private http: HttpClient) { }
 
   getData() {
-    return this.http.get('/assets/config.json');
+    return this.http.get('/assets/data.csv', {responseType: 'text'});
   }
 }
