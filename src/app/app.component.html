@@ -35,6 +35,9 @@
       <td>{{key.ratingtext}}</td>
       <td>{{key.votes}}</td>
 		</tr>
+    <tr *ngIf="persons?.length == 0">
+      <td colspan="3" class="no-data-available">No data!</td>
+    </tr>
 	</tbody>
 	<tfoot>
 		<tr>
