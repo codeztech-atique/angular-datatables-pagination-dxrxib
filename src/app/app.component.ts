@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private http: HttpClient, private papa: Papa) {
   }
   ngOnInit() {
-    // this.loadDataTable();
+    this.loadDataTable();
   }
 
   buttonInRowClick(event: any): void {
@@ -70,7 +70,7 @@ export class AppComponent {
   }
   loadDataTable() {
     // $('#example').empty();
-    this.table.clear();
+    // this.table.clear();
      this.table = $('#example').DataTable({
       deferRender: true,
 			searching: true,
@@ -79,7 +79,7 @@ export class AppComponent {
 			scrollY: 300,
 			scrollCollapse: true,
 			scroller: true,
-      paging: true,
+      paging: false,
       lengthChange: false,
 			ordering: true,
 			order: [[ 1, "desc" ]],
