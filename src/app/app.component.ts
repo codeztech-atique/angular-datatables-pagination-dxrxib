@@ -18,20 +18,20 @@ export class AppComponent {
   }
   ngOnInit() {
     let table = $('#example').DataTable({
-      "deferRender": true,
-			"searching": true,
-			"destroy": true,
-			"filter": true,
-			"scrollY": 200,
-			"scrollCollapse": true,
-			"scroller": true,
-            "paging": false,
-            "lengthChange": false,
-			"ordering": true,
-			"order": [[ 1, "desc" ]],
-            "info": true,
-            "autoWidth": false,
-			"sDom": 'lfrtip',
+      deferRender: true,
+			searching: true,
+			destroy: true,
+			filter: true,
+			scrollY: 100,
+			scrollCollapse: true,
+			scroller: true,
+      paging: true,
+      lengthChange: false,
+			ordering: true,
+			order: [[ 1, "desc" ]],
+      info: true,
+      autoWidth: false,
+			sDom: 'lfrtip',
       drawCallback: () => {
         $('.paginate_button.next').on('click', () => {
             this.nextButtonClickEvent();
