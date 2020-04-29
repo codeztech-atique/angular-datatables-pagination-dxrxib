@@ -1,7 +1,6 @@
 <h1 style="text-align:center">Paypal Examination</h1>
 <h6 style="color:red;text-align:center">Please select any CSV file in order to load the data</h6>
 <input type="file" accept=".csv" (change)="handleFileSelect($event)">
-<button (click)="ConvertCSVtoJSON()">Convert CSV to JSON</button>
 <hr>
 <table id="example" class="display" cellspacing="0" width="100%">
 	<thead>
@@ -23,7 +22,17 @@
 		</tr>
 	</tfoot>
 	<tbody>
-		<tr *ngFor="let key in tableData">
-			<td>{{ tableData[key] }}</td>
+		<tr *ngFor="let key of tableData">
+			<td>{{key['Restaurant ID']}}</td>
+      <td>{{key['Restaurant Name']}}</td>
+      <td>{{key['Cuisines']}}</td>
+      <td>{{key['Average Cost for two']}}</td>
+      <td>{{key['Currency']}}</td>
+      <td>{{key['Has Table booking']}}</td>
+      <td>{{key['Has Online delivery']}}</td>
+      <td>{{key['Aggregate rating']}}</td>
+      <td>{{key['Rating color']}}</td>
+      <td>{{key['Rating text']}}</td>
+      <td>{{key['Votes']}}</td>
 		</tr>
 	</tbody>

@@ -41,16 +41,6 @@ export class AppComponent {
     //do previous particular the records like  0 - 100 rows.
     //we are calling to API
   }
-  ConvertCSVtoJSON() {
-    // console.log(JSON.stringify(this.test));
-    // let csvData = '"Hello","World!"';
-    // this.papa.parse(csvData, {
-    //   complete: (results) => {
-    //     console.log('Parsed  : ', results.data[0][1]);
-    //     // console.log(results.data.length);
-    //   }
-    // });
-  }
   
   handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
