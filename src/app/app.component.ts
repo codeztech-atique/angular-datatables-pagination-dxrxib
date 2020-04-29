@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-declare let $: any;
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 // import * as data from './../app/tabledata';
