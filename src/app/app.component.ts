@@ -10,14 +10,14 @@ class Person {
   restaurantID: number;
   restaurantName: string;
   cuisines:string;
-  averageCostfortwo: string;
+  averageCostfortwo: number;
   currency: string;
   hasTablebooking: string;
   hasOnlinedelivery: string;
   aggregaterating: string;
   ratingcolor: string;
   ratingtext: string;
-  votes: string;
+  votes: number;
 }
 
 class DataTablesResponse {
@@ -54,6 +54,16 @@ export class AppComponent {
       responsive: true,
       serverSide: true,
       processing: true,
+      searching: true,
+			filter: true,
+			scrollY: 400,
+			scrollCollapse: true,
+			scroller: true,
+      paging: false,
+      ordering: true,
+      order: [[ 1, "desc" ]],
+      autoWidth: false,
+			sDom: 'lfrtip',
       ajax: (dataTablesParameters: any, callback) => {
         this.readfile.getData().subscribe(data => {
               this.papa.parse(data, {
@@ -73,8 +83,20 @@ export class AppComponent {
            });
         })
       },
-      columns: [{ data: 'id' }, { data: 'firstName', class: 'none' }, { data: 'lastName' }]
+      columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }]
     };
+
+  //   restaurantID: number;
+  // restaurantName: string;
+  // cuisines:string;
+  // averageCostfortwo: string;
+  // currency: string;
+  // hasTablebooking: string;
+  // hasOnlinedelivery: string;
+  // aggregaterating: string;
+  // ratingcolor: string;
+  // ratingtext: string;
+  // votes: string;
     // this.loadDataTable();
     // this.readfile.getData()
     //   .subscribe(data => {
@@ -108,27 +130,8 @@ export class AppComponent {
   nextButtonClickEvent(): void {
     console.log('next clicked')
   }
-  previousButtonClickEvent(): void {
-    //do previous particular the records like  0 - 100 rows.
-    //we are calling to API
-  }
   
-  handleFileSelect(evt) {
-    
-    var reader = new FileReader();
-    // reader.readAsText(file);
-    // let orderDetails = {};
-    // reader.onload = (event: any) => {
-    //   var csv = event.target.result; // Content of CSV file
-      
-    //   console.log(this.dataTableHeader);
-      
-    //   // this.table.clear();
-    //   // this.table.rows.add(this.tableData);
-    //   // this.table.draw();
-    // }
-    this.loadDataTable();
-  }
+
   loadDataTable() {
     // $('#example').empty();
     // this.table.clear();
