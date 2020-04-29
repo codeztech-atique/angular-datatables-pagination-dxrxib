@@ -55,15 +55,8 @@ export class AppComponent {
       serverSide: true,
       processing: true,
       searching: true,
+			destroy: true,
 			filter: true,
-			scrollY: 400,
-			scrollCollapse: true,
-			scroller: true,
-      paging: false,
-      ordering: true,
-      order: [[ 1, "desc" ]],
-      autoWidth: false,
-			sDom: 'lfrtip',
       ajax: (dataTablesParameters: any, callback) => {
         this.readfile.getData().subscribe(data => {
               this.papa.parse(data, {
@@ -78,6 +71,12 @@ export class AppComponent {
                       tableHeader.push(key);
                   })
                   this.dataTableHeader = tableHeader;
+                  console.log(this.tableData.length, this.tableData.length);
+                  callback({
+                    recordsTotal: this.tableData.length,
+                    recordsFiltered: this.tableData.length,
+                    data: []
+                  });
                   console.log('Order Details', this.tableData);
               }
            });
@@ -85,37 +84,6 @@ export class AppComponent {
       },
       columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }]
     };
-
-  //   restaurantID: number;
-  // restaurantName: string;
-  // cuisines:string;
-  // averageCostfortwo: string;
-  // currency: string;
-  // hasTablebooking: string;
-  // hasOnlinedelivery: string;
-  // aggregaterating: string;
-  // ratingcolor: string;
-  // ratingtext: string;
-  // votes: string;
-    // this.loadDataTable();
-    // this.readfile.getData()
-    //   .subscribe(data => {
-    //     this.papa.parse(data, {
-    //     skipEmptyLines: true,
-    //     header: true,
-    //     complete: (results) => {
-    //       console.log(results);
-    //       this.tableData = results.data;
-    //       var tableHeader = [];
-    //       Object.keys(this.tableData[0])
-    //          .forEach(function eachKey(key) {
-    //            tableHeader.push(key);
-    //       })
-    //       this.dataTableHeader = tableHeader;
-    //       console.log('Order Details', this.tableData);
-    //     }
-    //   });
-    // });
   }
 
   buttonInRowClick(event: any): void {
