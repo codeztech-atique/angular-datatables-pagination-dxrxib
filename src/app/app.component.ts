@@ -70,6 +70,7 @@ export class AppComponent {
   }
   loadDataTable() {
     // $('#example').empty();
+    this.table.clear();
      this.table = $('#example').DataTable({
       deferRender: true,
 			searching: true,
@@ -91,6 +92,7 @@ export class AppComponent {
       //     });
       // }
     });
+    this.table.draw();
   }
  
 
