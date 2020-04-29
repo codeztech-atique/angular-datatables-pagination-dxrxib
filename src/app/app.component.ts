@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
+import { ReadfileService } from './readfile.service';
 declare let $: any;
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent {
   tableData = [];
   dataTableHeader = [];
   table: any;
-  constructor(private http: HttpClient, private papa: Papa) {
+  constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
   }
   ngOnInit() {
     this.loadDataTable();
@@ -40,6 +41,11 @@ export class AppComponent {
   handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     var file = files[0];
+    // var file = './data.csv';
+    this.readfile.getData()
+      .subscribe(data => {
+        console.log(data);
+      });
     var reader = new FileReader();
     reader.readAsText(file);
     let orderDetails = {};
