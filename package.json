@@ -13,7 +13,7 @@
     "angular-datatables": "6.0.0",
     "core-js": "2.5.5",
     "datatables.net": "2.1.1",
-    "jquery": "3.3.1",
+    "jquery": "3.5.0",
     "@types/jquery": "3.3.1",
     "ngx-papaparse": "^3.0.2",
     "rxjs": "6.1.0",
