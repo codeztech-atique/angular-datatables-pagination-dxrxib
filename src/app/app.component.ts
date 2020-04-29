@@ -13,6 +13,7 @@ export class AppComponent {
   csvData: any[] = [];
   headerRow: any[] = [];
   tableData = [];
+  dataTableHeader = [];
   constructor(private http: HttpClient, private papa: Papa) {
   }
   ngOnInit() {
@@ -42,7 +43,7 @@ export class AppComponent {
     //we are calling to API
   }
   ConvertCSVtoJSON() {
-    console.log(JSON.stringify(this.test));
+    // console.log(JSON.stringify(this.test));
     // let csvData = '"Hello","World!"';
     // this.papa.parse(csvData, {
     //   complete: (results) => {
@@ -66,23 +67,15 @@ export class AppComponent {
         complete: (results) => {
           console.log(results);
           this.tableData = results.data;
-          // for (let i = 0; i < results.data.length; i++) {
-          //   console.log(results.data[i]);
-
-          //   var res = results.data[i];
-          //   // Object.keys(res)
-          //   //   .forEach(function eachKey(key) { 
-          //   //     orderDetails = {
-          //   //       key: res[key]
-          //   //     };
-          //   //     this.test.push(orderDetails);
-          //   // });
-            
-           
-           
-          // }
-          // console.log(this.test);
+          var tableHeader = [];
+          Object.keys(this.tableData[0])
+             .forEach(function eachKey(key) {
+                console.log(key);
+                tableHeader.push(key);
+          })
           console.log('Parsed: k', results.data);
+          this.dataTableHeader = tableHeader;
+          console.log('Table Header', this.dataTableHeader);
           console.log('Order Details', this.tableData);
         }
       });
