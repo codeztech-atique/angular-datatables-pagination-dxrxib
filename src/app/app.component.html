@@ -2,26 +2,26 @@
 <h6 style="color:red;text-align:center">Please select the giving restaurant CSV file in order to load the data</h6>
 <input type="file" accept=".csv" style="text-align:center" (change)="handleFileSelect($event)">
 <hr>
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="example" class="display" class="display" style="width:100%">
 	<thead>
 		<tr>
-			<th *ngFor="let item of dataTableHeader">
+			<!-- <th *ngFor="let item of dataTableHeader">
 			  {{item}}
-      </th>
-			<!-- <th>Office</th>
-			<th>Age</th>
-			<th>Start date</th>
-			<th>Salary</th> -->
+      </th> -->
+      <th>Restaurant ID</th>
+      <th>Restaurant Name</th>
+      <th>Cuisines</th>
+      <th>Average Cost for two</th>
+      <th>Currency</th>
+      <th>Has Table booking</th>
+      <th>Has Online delivery</th>
+      <th>Aggregate rating</th>
+      <th>Rating color</th>
+      <th>Rating text</th>
+      <th>Votes</th>
 		</tr>
 	</thead>
-	<tfoot>
-		<tr>
-			<th *ngFor="let item of dataTableHeader">
-			  {{item}}
-      </th>
-		</tr>
-	</tfoot>
-	<tbody>
+  <tbody>
 		<tr *ngFor="let key of tableData">
 			<td>{{key['Restaurant ID']}}</td>
       <td>{{key['Restaurant Name']}}</td>
@@ -36,3 +36,21 @@
       <td>{{key['Votes']}}</td>
 		</tr>
 	</tbody>
+	<tfoot>
+		<tr>
+			<!-- <th *ngFor="let item of dataTableHeader">
+			  {{item}}
+      </th> -->
+      <th>Restaurant ID</th>
+      <th>Restaurant Name</th>
+      <th>Cuisines</th>
+      <th>Average Cost for two</th>
+      <th>Currency</th>
+      <th>Has Table booking</th>
+      <th>Has Online delivery</th>
+      <th>Aggregate rating</th>
+      <th>Rating color</th>
+      <th>Rating text</th>
+      <th>Votes</th>
+		</tr>
+	</tfoot>

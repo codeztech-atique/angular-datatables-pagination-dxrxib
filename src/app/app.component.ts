@@ -14,30 +14,11 @@ export class AppComponent {
   headerRow: any[] = [];
   tableData = [];
   dataTableHeader = [];
+  table: any;
   constructor(private http: HttpClient, private papa: Papa) {
   }
   ngOnInit() {
-    let table = $('#example').DataTable({
-      deferRender: true,
-			searching: true,
-			destroy: true,
-			filter: true,
-			scrollY: 100,
-			scrollCollapse: true,
-			scroller: true,
-      paging: true,
-      lengthChange: false,
-			ordering: true,
-			order: [[ 1, "desc" ]],
-      info: true,
-      autoWidth: false,
-			sDom: 'lfrtip',
-      drawCallback: () => {
-        $('.paginate_button.next').on('click', () => {
-            this.nextButtonClickEvent();
-          });
-      }
-    });
+    // this.loadDataTable();
   }
 
   buttonInRowClick(event: any): void {
@@ -74,18 +55,43 @@ export class AppComponent {
           var tableHeader = [];
           Object.keys(this.tableData[0])
              .forEach(function eachKey(key) {
-                console.log(key);
-                tableHeader.push(key);
+               tableHeader.push(key);
           })
-          console.log('Parsed: k', results.data);
           this.dataTableHeader = tableHeader;
-          console.log('Table Header', this.dataTableHeader);
           console.log('Order Details', this.tableData);
         }
       });
+      console.log(this.dataTableHeader);
+      this.loadDataTable();
+      // this.table.clear();
+      // this.table.rows.add(this.tableData);
+      // this.table.draw();
     }
   }
-
+  loadDataTable() {
+    // $('#example').empty();
+     this.table = $('#example').DataTable({
+      deferRender: true,
+			searching: true,
+			destroy: true,
+			filter: true,
+			scrollY: 100,
+			scrollCollapse: true,
+			scroller: true,
+      paging: true,
+      lengthChange: false,
+			ordering: true,
+			order: [[ 1, "desc" ]],
+      info: true,
+      autoWidth: false,
+			sDom: 'lfrtip',
+      // drawCallback: () => {
+      //   $('.paginate_button.next').on('click', () => {
+      //       this.nextButtonClickEvent();
+      //     });
+      // }
+    });
+  }
  
 
 
