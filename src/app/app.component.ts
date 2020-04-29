@@ -86,6 +86,29 @@ export class AppComponent {
     };
   }
 
+  // loadDataTable() {
+  //    this.table = $('#example').DataTable({
+  //     searching: true,
+	// 		filter: true,
+  //     responsive: true,
+  //     processing: true,
+	// 		scrollY: 300,
+	// 		scrollCollapse: true,
+	// 		scroller: true,
+  //     paging: false,
+  //     ordering: true,
+	// 		order: [[ 1, "desc" ]],
+  //     autoWidth: false,
+	// 		// sDom: 'lfrtip',
+  //     // drawCallback: () => {
+  //     //   $('.paginate_button.next').on('click', () => {
+  //     //       this.nextButtonClickEvent();
+  //     //     });
+  //     // }
+  //   });
+  //   this.table.draw();
+  // }
+
   buttonInRowClick(event: any): void {
     event.stopPropagation();
     console.log('Button in the row clicked.');
@@ -100,30 +123,7 @@ export class AppComponent {
   }
   
 
-  loadDataTable() {
-    // $('#example').empty();
-    // this.table.clear();
-     this.table = $('#example').DataTable({
-      searching: true,
-			filter: true,
-      responsive: true,
-      processing: true,
-			scrollY: 300,
-			scrollCollapse: true,
-			scroller: true,
-      paging: false,
-      ordering: true,
-			order: [[ 1, "desc" ]],
-      autoWidth: false,
-			sDom: 'lfrtip',
-      // drawCallback: () => {
-      //   $('.paginate_button.next').on('click', () => {
-      //       this.nextButtonClickEvent();
-      //     });
-      // }
-    });
-    this.table.draw();
-  }
+  
  
 
   // ngAfterViewInit(): void {
