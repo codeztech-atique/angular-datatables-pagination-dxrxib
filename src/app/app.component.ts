@@ -126,11 +126,11 @@ export class AppComponent {
   }
  
 
-  ngAfterViewInit(): void {
-    this.dtElement.dtInstance.then((dtInstance: any) => {
-      console.info("foobar");
-      dtInstance.columns.adjust()
-         .responsive.recalc();
-    });
-  }
+  // ngAfterViewInit(): void {
+  //   this.dtElement.dtInstance.then((dtInstance: any) => {
+  //     console.info("foobar");
+  //     dtInstance.columns.adjust()
+  //        .responsive.recalc();
+  //   });
+  // }
 }
