@@ -5,10 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { PapaParseModule } from "ngx-papaparse";
+import { DataTablesModule } from 'angular-datatables';
 import { ReadfileService } from './readfile.service';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpClientModule,PapaParseModule ],
+  imports:      [ BrowserModule, FormsModule, HttpClientModule,PapaParseModule, DataTablesModule ],
   declarations: [ AppComponent, HelloComponent ],
   bootstrap:    [ AppComponent ],
   providers: [ReadfileService]

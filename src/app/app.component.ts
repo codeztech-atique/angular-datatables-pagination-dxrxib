@@ -1,8 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Papa } from 'ngx-papaparse';
 import { ReadfileService } from './readfile.service';
+import { DataTableDirective } from 'angular-datatables';
 declare let $: any;
+
+
+class Person {
+  restaurantID: number;
+  restaurantName: string;
+  cuisines:string;
+  averageCostfortwo: string;
+  currency: string;
+  hasTablebooking: string;
+  hasOnlinedelivery: string;
+  aggregaterating: string;
+  ratingcolor: string;
+  ratingtext: string;
+  votes: string;
+}
+
+class DataTablesResponse {
+  data: any[];
+  draw: number;
+  recordsFiltered: number;
+  recordsTotal: number;
+}
+
+
 
 @Component({
   selector: 'my-app',
@@ -15,28 +40,60 @@ export class AppComponent {
   tableData = [];
   dataTableHeader = [];
   table: any;
+
+  @ViewChild(DataTableDirective)
+  dtElement: DataTableDirective;
+  dtOptions: any = {};
+  persons: Person[];
   constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
   }
-  ngOnInit() {
-    this.loadDataTable();
-    this.readfile.getData()
-      .subscribe(data => {
-        this.papa.parse(data, {
-        skipEmptyLines: true,
-        header: true,
-        complete: (results) => {
-          console.log(results);
-          this.tableData = results.data;
-          var tableHeader = [];
-          Object.keys(this.tableData[0])
-             .forEach(function eachKey(key) {
-               tableHeader.push(key);
-          })
-          this.dataTableHeader = tableHeader;
-          console.log('Order Details', this.tableData);
-        }
-      });
-    });
+  ngOnInit(): void  {
+    const that = this;
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      responsive: true,
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.readfile.getData().subscribe(data => {
+              this.papa.parse(data, {
+              skipEmptyLines: true,
+              header: true,
+              complete: (results) => {
+                  console.log(results);
+                  this.tableData = results.data;
+                  var tableHeader = [];
+                  Object.keys(this.tableData[0])
+                    .forEach(function eachKey(key) {
+                      tableHeader.push(key);
+                  })
+                  this.dataTableHeader = tableHeader;
+                  console.log('Order Details', this.tableData);
+              }
+           });
+        })
+      },
+      columns: [{ data: 'id' }, { data: 'firstName', class: 'none' }, { data: 'lastName' }]
+    };
+    // this.loadDataTable();
+    // this.readfile.getData()
+    //   .subscribe(data => {
+    //     this.papa.parse(data, {
+    //     skipEmptyLines: true,
+    //     header: true,
+    //     complete: (results) => {
+    //       console.log(results);
+    //       this.tableData = results.data;
+    //       var tableHeader = [];
+    //       Object.keys(this.tableData[0])
+    //          .forEach(function eachKey(key) {
+    //            tableHeader.push(key);
+    //       })
+    //       this.dataTableHeader = tableHeader;
+    //       console.log('Order Details', this.tableData);
+    //     }
+    //   });
+    // });
   }
 
   buttonInRowClick(event: any): void {
@@ -78,6 +135,8 @@ export class AppComponent {
      this.table = $('#example').DataTable({
       searching: true,
 			filter: true,
+      responsive: true,
+      processing: true,
 			scrollY: 300,
 			scrollCollapse: true,
 			scroller: true,
@@ -96,5 +155,11 @@ export class AppComponent {
   }
  
 
-
+  ngAfterViewInit(): void {
+    this.dtElement.dtInstance.then((dtInstance: any) => {
+      console.info("foobar");
+      dtInstance.columns.adjust()
+         .responsive.recalc();
+    });
+  }
 }

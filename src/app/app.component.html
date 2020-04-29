@@ -2,7 +2,7 @@
 <!-- <h4 style="color:red;text-align:center">Please select the giving restaurant CSV file in order to load the data</h4>
 <input type="file" accept=".csv" style="text-align:center" (change)="handleFileSelect($event)"> -->
 <hr>
-<table id="example" class="display" class="display" style="width:100%">
+<table datatable [dtOptions]="dtOptions" class="display" style="width:100%">
 	<thead>
 		<tr>
 			<!-- <th *ngFor="let item of dataTableHeader">
@@ -23,17 +23,17 @@
 	</thead>
   <tbody>
 		<tr *ngFor="let key of tableData">
-			<td>{{key['Restaurant ID']}}</td>
-      <td>{{key['Restaurant Name']}}</td>
-      <td>{{key['Cuisines']}}</td>
-      <td>{{key['Average Cost for two']}}</td>
-      <td>{{key['Currency']}}</td>
-      <td>{{key['Has Table booking']}}</td>
-      <td>{{key['Has Online delivery']}}</td>
-      <td>{{key['Aggregate rating']}}</td>
-      <td>{{key['Rating color']}}</td>
-      <td>{{key['Rating text']}}</td>
-      <td>{{key['Votes']}}</td>
+			<td>{{key.restaurantID}}</td>
+      <td>{{key.restaurantName}}</td>
+      <td>{{key.cuisines}}</td>
+      <td>{{key.averageCostfortwo}}</td>
+      <td>{{key.currency}}</td>
+      <td>{{key.hasTablebooking}}</td>
+      <td>{{key.hasOnlinedelivery}}</td>
+      <td>{{key.aggregaterating}}</td>
+      <td>{{key.ratingcolor}}</td>
+      <td>{{key.ratingtext}}</td>
+      <td>{{key.votes}}</td>
 		</tr>
 	</tbody>
 	<tfoot>
