@@ -1,6 +1,7 @@
 /* Add application styles & imports to this file! */
 @import url("https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css");
-@import url("https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css");
+@import url("https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css");
+
 
 /*
    server-side-angular-way.component.css
@@ -12,6 +13,6 @@
 /*
    src/styles.css (i.e. your global style)
 */
-.dataTables_empty {
+/* .dataTables_empty {
   display: none;
-}
+} */

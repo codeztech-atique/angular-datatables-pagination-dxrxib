@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
 			order: [[ 1, "desc" ]],
       info: true,
       language: {
-        infoEmpty: "<p style='color:red'>Opps! No records available</p>",
+        infoEmpty: "<p style='color:red;text-align:center'>Opps! No records available</p>",
       },
       autoWidth: false,
       ajax: {
@@ -72,7 +72,22 @@ export class AppComponent implements OnInit {
           return that.tableData;
         }
       },
-      columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }]
+      columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }],
+      dom: 'Blfrtip',
+      // Configure the buttons
+      buttons: [
+        'columnsToggle',
+        'colvis',
+        'copy',
+        'print',
+        {
+          text: 'Some button',
+          key: '1',
+          action: function (e, dt, node, config) {
+            alert('Button activated');
+          }
+        }
+      ]
     };
   }
 
