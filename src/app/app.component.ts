@@ -72,22 +72,10 @@ export class AppComponent implements OnInit {
           return that.tableData;
         }
       },
-      columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }],
-      dom: 'Blfrtip',
-      // Configure the buttons
-      buttons: [
-        'columnsToggle',
-        'colvis',
-        'copy',
-        'print',
-        {
-          text: 'Some button',
-          key: '1',
-          action: function (e, dt, node, config) {
-            alert('Button activated');
-          }
-        }
-      ]
+      columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }
+      ],
+      dom: "Bfrtip",
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
     };
   }
 
