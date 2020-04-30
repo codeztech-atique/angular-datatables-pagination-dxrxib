@@ -54,29 +54,29 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
   }
   ngOnInit(): void  {
+    var that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
-      ajax: (dataTablesParameters: any, callback) => {
-        this.readfile.getData().subscribe(data => {
-              this.papa.parse(data, {
-              skipEmptyLines: true,
-              header: true,
-              complete: (results) => {
-                  console.log(results);
-                  this.tableData = results.data;
-                  var tableHeader = [];
-                  Object.keys(this.tableData[0])
-                    .forEach(function eachKey(key) {
-                      tableHeader.push(key);
-                  })
-                  this.dataTableHeader = tableHeader;
-                  console.log(this.tableData.length, this.tableData.length);
-                  this.dtTrigger.next();
-                  console.log('Order Details', this.tableData);
-              }
-           });
-        })
+      ajax: {
+          url: "/assets/data.csv",
+          method: "GET",
+          dataType: 'text',
+          crossDomain: true, 
+          dataSrc: function ( json ) {
+            that.papa.parse(json, {
+            skipEmptyLines: true,
+            header: true,
+            complete: (results) => {
+                console.log(results.data);
+                that.tableData = results.data;
+                var tableHeader = [];
+                console.log(that.tableData.length, that.tableData.length);
+                console.log('Order Details', that.tableData);
+            }
+          });
+          return that.tableData;
+        }
       },
       columns: [{ data: 'restaurantID' }, { data: 'restaurantName'}, { data: 'cuisines' }, { data: 'averageCostfortwo' }, { data: 'currency' }, { data: 'hasTablebooking' }, { data: 'hasOnlinedelivery' }, { data: 'aggregaterating' }, { data: 'ratingcolor' }, { data: 'ratingtext' }, { data: 'votes' }]
     };
@@ -95,16 +95,9 @@ export class AppComponent implements OnInit {
   nextButtonClickEvent(): void {
     console.log('next clicked')
   }
-  
-  
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
-  }
-
-  private extractData(res: Response) {
-    const body = res;
-    return body || {};
   }
 }
