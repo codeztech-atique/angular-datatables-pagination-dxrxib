@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response } from '@angular/http';
 import { Papa } from 'ngx-papaparse';
-import { ReadfileService } from './readfile.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
@@ -36,7 +35,7 @@ export class AppComponent implements OnInit {
 
   
 
-  constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
+  constructor(private http: HttpClient, private papa: Papa) {
   }
   ngOnInit(): void  {
     var that = this;

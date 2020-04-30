@@ -6,13 +6,12 @@ import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
 import { PapaParseModule } from "ngx-papaparse";
 import { DataTablesModule } from 'angular-datatables';
-import { ReadfileService } from './readfile.service';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpClientModule,PapaParseModule, DataTablesModule, HttpModule ],
   declarations: [ AppComponent, HelloComponent ],
   bootstrap:    [ AppComponent ],
-  providers: [ReadfileService]
+  providers: []
 })
 export class AppModule { }
