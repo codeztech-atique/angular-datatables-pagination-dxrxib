@@ -51,6 +51,9 @@ export class AppComponent implements OnInit {
 			ordering: true,
 			order: [[ 1, "desc" ]],
       info: true,
+      language: {
+        infoEmpty: "<p style='color:red'>Opps! No records available</p>",
+      },
       autoWidth: false,
       ajax: {
           url: "/assets/data.csv",
