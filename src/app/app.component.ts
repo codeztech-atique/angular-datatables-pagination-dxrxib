@@ -9,19 +9,6 @@ import 'rxjs/add/operator/map';
 declare let $: any;
 
 
-class Person {
-  restaurantID: number;
-  restaurantName: string;
-  cuisines:string;
-  averageCostfortwo: number;
-  currency: string;
-  hasTablebooking: string;
-  hasOnlinedelivery: string;
-  aggregaterating: string;
-  ratingcolor: string;
-  ratingtext: string;
-  votes: number
-}
 
 class DataTablesResponse {
   data: any[];
@@ -45,10 +32,8 @@ export class AppComponent implements OnInit {
   table: any;
 
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject = new Subject();
   @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
 
-  tableData = [];
   
 
   constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
@@ -56,8 +41,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void  {
     var that = this;
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
+      // pagingType: 'full_numbers',
+      // pageLength: 10,
+      scrollY: 400,
+			scrollCollapse: true,
+			scroller: true,
+      paging: false,
+      lengthChange: false,
+			ordering: true,
+			order: [[ 1, "desc" ]],
+      info: true,
+      autoWidth: false,
       ajax: {
           url: "/assets/data.csv",
           method: "GET",
@@ -68,13 +62,11 @@ export class AppComponent implements OnInit {
             skipEmptyLines: true,
             header: true,
             complete: (results) => {
-                console.log(results.data);
                 that.tableData = results.data;
                 var tableHeader = [];
-                console.log(that.tableData.length, that.tableData.length);
-                console.log('Order Details', that.tableData);
             }
           });
+          
           return that.tableData;
         }
       },
@@ -83,21 +75,5 @@ export class AppComponent implements OnInit {
   }
 
 
-  buttonInRowClick(event: any): void {
-    event.stopPropagation();
-    console.log('Button in the row clicked.');
-  }
 
-  wholeRowClick(): void {
-    console.log('Whole row clicked.');
-  }
-
-  nextButtonClickEvent(): void {
-    console.log('next clicked')
-  }
-
-  ngOnDestroy(): void {
-    // Do not forget to unsubscribe the event
-    this.dtTrigger.unsubscribe();
-  }
 }
