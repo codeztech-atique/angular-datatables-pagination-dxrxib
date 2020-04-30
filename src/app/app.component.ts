@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Response } from '@angular/http';
 import { Papa } from 'ngx-papaparse';
 import { ReadfileService } from './readfile.service';
 import { DataTableDirective } from 'angular-datatables';
@@ -19,7 +20,7 @@ class Person {
   aggregaterating: string;
   ratingcolor: string;
   ratingtext: string;
-  votes: number;
+  votes: number
 }
 
 class DataTablesResponse {
@@ -36,30 +37,26 @@ class DataTablesResponse {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   csvData: any[] = [];
   headerRow: any[] = [];
   tableData = [];
   dataTableHeader = [];
   table: any;
 
-  @ViewChild(DataTableDirective)
-  dtElement: DataTableDirective;
-  dtOptions: any = {};
-  persons: Person[];
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject = new Subject();
+  @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
+
+  tableData = [];
+  
+
   constructor(private http: HttpClient, private papa: Papa, private readfile: ReadfileService) {
   }
   ngOnInit(): void  {
-    const that = this;
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
-      responsive: true,
-      serverSide: true,
-      processing: true,
-      searching: true,
-			destroy: true,
-			filter: true,
       ajax: (dataTablesParameters: any, callback) => {
         this.readfile.getData().subscribe(data => {
               this.papa.parse(data, {
@@ -75,11 +72,7 @@ export class AppComponent {
                   })
                   this.dataTableHeader = tableHeader;
                   console.log(this.tableData.length, this.tableData.length);
-                  callback({
-                    recordsTotal: this.tableData.length,
-                    recordsFiltered: this.tableData.length,
-                    data: []
-                  });
+                  this.dtTrigger.next();
                   console.log('Order Details', this.tableData);
               }
            });
@@ -89,28 +82,6 @@ export class AppComponent {
     };
   }
 
-  // loadDataTable() {
-  //    this.table = $('#example').DataTable({
-  //     searching: true,
-	// 		filter: true,
-  //     responsive: true,
-  //     processing: true,
-	// 		scrollY: 300,
-	// 		scrollCollapse: true,
-	// 		scroller: true,
-  //     paging: false,
-  //     ordering: true,
-	// 		order: [[ 1, "desc" ]],
-  //     autoWidth: false,
-	// 		// sDom: 'lfrtip',
-  //     // drawCallback: () => {
-  //     //   $('.paginate_button.next').on('click', () => {
-  //     //       this.nextButtonClickEvent();
-  //     //     });
-  //     // }
-  //   });
-  //   this.table.draw();
-  // }
 
   buttonInRowClick(event: any): void {
     event.stopPropagation();
@@ -125,15 +96,15 @@ export class AppComponent {
     console.log('next clicked')
   }
   
-
   
- 
 
-  // ngAfterViewInit(): void {
-  //   this.dtElement.dtInstance.then((dtInstance: any) => {
-  //     console.info("foobar");
-  //     dtInstance.columns.adjust()
-  //        .responsive.recalc();
-  //   });
-  // }
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+  private extractData(res: Response) {
+    const body = res;
+    return body || {};
+  }
 }
